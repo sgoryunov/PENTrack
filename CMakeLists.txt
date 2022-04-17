@@ -5,9 +5,16 @@ if (NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release)
 endif()
 
-#set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# it for hydra cluster =============
+set(GMP_LIBRARIES $ENV{GMP_ROOT}/lib)
+set(GMP_INCLUDE_DIR $ENV{GMP_ROOT}/include)
+set(MPFR_LIBRARIES $ENV{MPFR_ROOT}/lib)
+set(MPFR_INCLUDE_DIR $ENV{MPFR_ROOT}/include)
+set(BOOST_ROOT $ENV{BOOST_ROOT})
+#  =====================
 include_directories("alglib-3.15.0/cpp/src")
 add_library(alglib OBJECT alglib-3.15.0/cpp/src/alglibinternal.cpp
                           alglib-3.15.0/cpp/src/integration.cpp
@@ -69,7 +76,7 @@ else()
 	message(STATUS "Could not find ROOT, you won't be able to log to ROOT files")
 endif()
 
-find_package(HDF5 COMPONENTS HL)
+# find_package(HDF5 COMPONENTS HL)
 if (HDF5_FOUND)
 	include_directories(${HDF5_INCLUDE_DIRS})
 	target_compile_definitions(PENTrack_src PUBLIC USEHDF5=1)
