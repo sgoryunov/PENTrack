@@ -36,3 +36,5 @@ doc/
 #ignore VS Code files
 .vscode/
 compile_commands.json
+
+.venv

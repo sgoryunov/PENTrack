@@ -76,7 +76,7 @@ else()
 	message(STATUS "Could not find ROOT, you won't be able to log to ROOT files")
 endif()
 
-# find_package(HDF5 COMPONENTS HL)
+find_package(HDF5 COMPONENTS HL)
 if (HDF5_FOUND)
 	include_directories(${HDF5_INCLUDE_DIRS})
 	target_compile_definitions(PENTrack_src PUBLIC USEHDF5=1)
