@@ -1,7 +1,7 @@
 [GLOBAL]
 # simtype: 1 => particles, 3 => Bfield, 4 => cut through BField, 7 => print geometry
 simtype 1    # Choose either 1 or 4 for this test
-simcount 100
+simcount 1
 simtime 1
 
 secondaries 0
@@ -29,7 +29,7 @@ parameters 0	0.1	0	360	-0.05  	0.05
 particle neutron
 
 Emin 0e-9
-Emax 500e-9
+Emax 100e-9
 spectrum 1
 
 phi_v_min 0		# min. azimuth angle of velocity
@@ -37,7 +37,7 @@ phi_v_max 360		# max. azimuth angle of velocity
 phi_v 1			# differential initial distribution of azimuth angle of velocity - volume source only!
 
 theta_v_min 0		# min. polar angle of velocity
-theta_v_max 180		# max. polar angle of velocity
+theta_v_max 180	# max. polar angle of velocity
 theta_v sin(x)		# differential initial distribution of polar angle of velocity - volume source only!
 
 polarization 0		# 1: low-field-seeker, -1: high-field-seeker, 0: random
@@ -56,7 +56,8 @@ tau 1
 tmax 9e99
 lmax 9e99
 
-endlog 0
+endlog 1
+endlogvars jobnumber particle tstart xstart ystart zstart vxstart vystart vzstart tend xend yend zend vxend vyend vzend
 
 tracklog 1
 tracklogvars jobnumber particle polarisation t x y z vx vy vz #H E Bx dBxdx dBxdy dBxdz By dBydx dBydy dBydz Bz dBzdx dBzdy dBzdz Ex Ey Ez V

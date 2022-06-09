@@ -51,7 +51,7 @@ def main():
         fig = plt.figure()
         ax = plt.axes(projection='3d')
         neutr_num = 1
-        with open ('000000000000neutrontrack.out',"r") as f1:
+        with open ('out/000000000000neutrontrack.out',"r") as f1:
             lines = f1.readlines()[1:]
             for num, line in enumerate(lines):
                 text = line.split(" ")
