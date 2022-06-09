@@ -8,13 +8,16 @@ endif()
 # set(CMAKE_CXX_STANDARD 11)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# it for hydra cluster =============
-set(GMP_LIBRARIES $ENV{GMP_ROOT}/lib)
-set(GMP_INCLUDE_DIR $ENV{GMP_ROOT}/include)
-set(MPFR_LIBRARIES $ENV{MPFR_ROOT}/lib)
-set(MPFR_INCLUDE_DIR $ENV{MPFR_ROOT}/include)
-set(BOOST_ROOT $ENV{BOOST_ROOT})
-#  =====================
+# ========it for hydra cluster =============
+if($ENV{HOSTNAME} MATCHES "hydra")
+	set(GMP_LIBRARIES $ENV{GMP_ROOT}/lib)
+	set(GMP_INCLUDE_DIR $ENV{GMP_ROOT}/include)
+	set(MPFR_LIBRARIES $ENV{MPFR_ROOT}/lib)
+	set(MPFR_INCLUDE_DIR $ENV{MPFR_ROOT}/include)
+	set(BOOST_ROOT $ENV{BOOST_ROOT})
+endif()
+#  =======it for my PC==========================
+
 include_directories("alglib-3.15.0/cpp/src")
 add_library(alglib OBJECT alglib-3.15.0/cpp/src/alglibinternal.cpp
                           alglib-3.15.0/cpp/src/integration.cpp
