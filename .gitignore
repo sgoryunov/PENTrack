@@ -38,3 +38,4 @@ doc/
 compile_commands.json
 
 .venv
+*.FCStd1

@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 
 def main():
    
-    
-
     # m_partial = 
     t = []
     x = []
@@ -24,31 +22,61 @@ def main():
     by0 = []
     bz0 = []
     
-    try:
+    
+    # try:
 
-        with open ('comsolField.txt',"r") as f1:
-            lines = f1.readlines()[8:]
+    # #     with open ('comsolField.txt',"r") as f1:
+    #     with open ('simpleCoil.txt',"r") as f1:
+    #         lines = f1.readlines()[8:]
+    #         for num, line in enumerate(lines):
+    #             text = line.split()
+    #             x0.append(float( text[0]) )
+    #             y0.append(float( text[1]) )
+    #             z0.append(float( text[2]) )
+    #             bx0.append(float( text[3]) )
+    #             by0.append(float( text[4]) )
+    #             bz0.append(float( text[5]) )
+    #     # fig3 = plt.figure(3)
+    #     ax = plt.figure(1).add_subplot(projection='3d')
+    #     ax.quiver(x0, y0, z0, bx0, by0, bz0, length=0.3, normalize=True)
+    #     plt.title('Vector Field zy plane (Original COMSOL)')
+    #     ax.set_xlabel('X Label')
+    #     ax.set_ylabel('Y Label')
+    #     ax.set_zlabel('Z Label')
+    #     # plt.show()
+    # except IOError:
+    #     print("Can't find comsolField.txt... skipping plot")
+    
+    try:
+        fig, axs = plt.subplots(1, 2, sharey=True, tight_layout=True)
+        with open ('out/000000000000neutronend.out',"r") as f1:
+            lines = f1.readlines()[1:]
+            vz_end = []
+            vz_start =[]
             for num, line in enumerate(lines):
-                text = line.split()
-                x0.append(float( text[0]) )
-                y0.append(float( text[1]) )
-                z0.append(float( text[2]) )
-                bx0.append(float( text[3]) )
-                by0.append(float( text[4]) )
-                bz0.append(float( text[5]) )
-        # fig3 = plt.figure(3)
-        ax = plt.figure(1).add_subplot(projection='3d')
-        ax.quiver(x0, y0, z0, bx0, by0, bz0, length=0.3, normalize=True)
-        plt.title('Vector Field zy plane (Original COMSOL)')
-        ax.set_xlabel('X Label')
-        ax.set_ylabel('Y Label')
-        ax.set_zlabel('Z Label')
-        # plt.show()
+                text = line.split(" ")
+                vz_start.append(float( text[8]) )
+                vz_end.append(float( text[15]) )
+    
+        axs[0].hist(vz_start, bins=50)
+        axs[1].hist(vz_end, bins=50)
     except IOError:
-        print("Can't find comsolField.txt... skipping plot")
+        print("Can't find BFCut.out... skipping plot")
 
     try:
-        fig = plt.figure()
+        fig, axs = plt.subplots(tight_layout=True)
+        with open ('out/000000000000neutronhit.out',"r") as f1:
+            lines = f1.readlines()[1:]
+            vz = []
+            for num, line in enumerate(lines):
+                text = line.split(" ")
+                vz.append(float( text[4]) )
+        axs.hist(vz, bins=50)
+    except IOError:
+        print("Can't find BFCut.out... skipping plot")
+
+    try:
+        fig = plt.figure(3)
         ax = plt.axes(projection='3d')
         neutr_num = 1
         with open ('out/000000000000neutrontrack.out',"r") as f1:
